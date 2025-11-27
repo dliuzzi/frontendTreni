@@ -48,7 +48,7 @@ export function FilterSection({ filters, setFilters }: FilterSectionProps) {
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
       <h2 className="text-gray-900 mb-4">Filtri</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* Treno Dropdown */}
         <div>
           <label className="block text-sm text-gray-700 mb-2">Treno</label>
@@ -124,13 +124,6 @@ export function FilterSection({ filters, setFilters }: FilterSectionProps) {
           </div>
         </div>
       )}
-
-      {/* Apply Button */}
-      <div className="flex justify-end">
-        <button className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          Applica filtri
-        </button>
-      </div>
     </div>
   );
 }
