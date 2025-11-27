@@ -105,7 +105,7 @@ export default function App() {
           <div className="space-y-6 mb-8">
             <SpeedChart train={filters.train} period={filters.period} />
             <EnergyChart train={filters.train} period={filters.period} />
-            <MassChart />
+            <MassChart train={filters.train} period={filters.period} />
           </div>
 
           {/* Export Section */}
