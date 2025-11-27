@@ -27,13 +27,11 @@ export function EnergyChart({ train, period }: EnergyChartProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  function mapTrainToId(trainLabel?: string) {
-    if (!trainLabel) return null;
-    const match = trainLabel.match(/(\d+)/);
-    const num = match ? parseInt(match[0], 10) : NaN;
-    if (Number.isNaN(num)) return null;
-    if (num >= 1000) return String(num);
-    return String(1000 + num);
+  // Expect `train` to be the treno_id string coming from /treni (e.g. "1001").
+  function getTrainId(trainValue?: string) {
+    if (!trainValue) return null;
+    if (!/^[0-9]+$/.test(trainValue)) return null;
+    return trainValue;
   }
 
   function mapPeriodToDurata(periodLabel?: string) {
@@ -46,7 +44,7 @@ export function EnergyChart({ train, period }: EnergyChartProps) {
   }
 
   useEffect(() => {
-    const id = mapTrainToId(train);
+    const id = getTrainId(train);
     const durata = mapPeriodToDurata(period);
     if (!id) {
       setImgSrc(null);

@@ -17,17 +17,13 @@ export function ExportSection({ train, period }: ExportSectionProps) {
     return 'giorno';
   };
 
-  // train can be treno_id (e.g. "1001") or legacy label like "Treno 001"
-  const mapTrainToId = (trainLabel?: string) => {
-    if (!trainLabel) return null;
-    const match = trainLabel.match(/(\d+)/);
-    if (!match) return null;
-    const num = parseInt(match[0], 10);
-    if (Number.isNaN(num)) return null;
-    return String(num >= 1000 ? num : 1000 + num);
+  // train should be the numeric treno_id string coming from /treni (e.g. "1001").
+  const getTrainId = (trainValue?: string) => {
+    if (!trainValue) return null;
+    return /^[0-9]+$/.test(trainValue) ? trainValue : null;
   };
 
-  const trenoId = useMemo(() => mapTrainToId(train), [train]);
+  const trenoId = useMemo(() => getTrainId(train), [train]);
   const durata = useMemo(() => mapPeriodToDurata(period), [period]);
 
   async function downloadFrom(url: string, filename: string) {

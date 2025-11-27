@@ -27,16 +27,13 @@ export function SpeedChart({ train, period }: SpeedChartProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Map filter text (from FilterSection) to API parameters
-  function mapTrainToId(trainLabel?: string) {
-    if (!trainLabel) return null;
-    const match = trainLabel.match(/(\d+)/);
-    const num = match ? parseInt(match[0], 10) : NaN;
-    if (Number.isNaN(num)) return null;
-    // If the passed number already looks like a full treno_id (>= 1000), return it
-    if (num >= 1000) return String(num);
-    // Handle legacy short format (e.g. "Treno 001") by adding 1000
-    return String(1000 + num);
+  // We expect `train` to be the treno_id string coming from /treni (e.g. "1001").
+  // Use it directly if numeric; otherwise treat as not selected.
+  function getTrainId(trainValue?: string) {
+    if (!trainValue) return null;
+    // only accept an integer id string
+    if (!/^[0-9]+$/.test(trainValue)) return null;
+    return trainValue;
   }
 
   function mapPeriodToDurata(periodLabel?: string) {
@@ -49,7 +46,7 @@ export function SpeedChart({ train, period }: SpeedChartProps) {
   }
 
   useEffect(() => {
-    const id = mapTrainToId(train);
+    const id = getTrainId(train);
     const durata = mapPeriodToDurata(period);
 
     if (!id) {
