@@ -109,7 +109,7 @@ export default function App() {
           </div>
 
           {/* Export Section */}
-          <ExportSection />
+          <ExportSection train={filters.train} period={filters.period} />
         </main>
       </div>
     </div>
