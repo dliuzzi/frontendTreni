@@ -8,12 +8,10 @@ interface SidebarProps {
 
 export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
   const menuItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'velocita', label: 'Velocità', icon: Gauge },
-    { id: 'consumo', label: 'Consumo Energetico', icon: Zap },
-    { id: 'massa', label: 'Sollevamento Carico', icon: Weight },
-    { id: 'report', label: 'Report / Esportazione', icon: FileText },
-    { id: 'impostazioni', label: 'Impostazioni', icon: Settings }
+    { id: 'Velocità', label: 'Velocità', icon: Gauge },
+    { id: 'Consumo', label: 'Consumo Energetico', icon: Zap },
+    { id: 'Massa', label: 'Sollevamento Carico', icon: Weight },
+    { id: 'Report', label: 'Report / Esportazione', icon: FileText },
   ];
 
   return (
